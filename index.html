@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniFix - Central de Manutenção</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
+
+  <header>
+    <div class="header-content">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🛠️</span>
+        <div>
+          <h1>UniFix</h1>
+          <p>Central de Manutenção Universitária</p>
+        </div>
+      </div>
+
+      <nav aria-label="Navegação principal">
+        <button type="button" onclick="showSection('inicio')">Início</button>
+        <button type="button" onclick="showSection('novo')">Novo chamado</button>
+        <button type="button" onclick="showSection('chamados')">Meus chamados</button>
+        <button type="button" onclick="showSection('painel')">Painel técnico</button>
+        <span class="connection-status" aria-label="Sistema conectado em tempo real">
+          <span class="dot" aria-hidden="true"></span> Tempo real
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- INÍCIO -->
+    <section id="inicio" class="section active" aria-labelledby="tituloInicio">
+      <div class="hero">
+        <h2 id="tituloInicio">Central de Manutenção Universitária</h2>
+        <p>Encontrou um problema na universidade? Registre um chamado e acompanhe a solução em tempo real.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" onclick="showSection('novo')">+ Abrir novo chamado</button>
+          <button type="button" class="btn btn-secondary" onclick="showSection('chamados')">Consultar meus chamados</button>
+        </div>
+      </div>
+
+      <div class="accessibility-panel" aria-labelledby="acessibilidadeTitulo">
+        <h2 id="acessibilidadeTitulo">Recursos de acessibilidade</h2>
+        <div class="accessibility-actions">
+          <button type="button" onclick="toggleContrast()">Alto contraste</button>
+          <button type="button" onclick="toggleLargeText()">Aumentar texto</button>
+          <button type="button" onclick="focusMain()">Focar conteúdo</button>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="stat-label">Total de chamados</div>
+          <div id="statTotal" class="stat-number">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Abertos</div>
+          <div id="statOpen" class="stat-number">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Em atendimento</div>
+          <div id="statProgress" class="stat-number">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Resolvidos</div>
+          <div id="statResolved" class="stat-number">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVO CHAMADO -->
+    <section id="novo" class="section" aria-labelledby="tituloNovo">
+      <div class="form-card">
+        <h2 id="tituloNovo">Abrir novo chamado</h2>
+        <form id="ticketForm">
+          <div class="form-group">
+            <label for="title">Título <span class="required">*</span></label>
+            <input id="title" name="title" type="text" required maxlength="100" placeholder="Ex.: Ar-condicionado com defeito">
+          </div>
+          <div class="form-group">
+            <label for="category">Categoria <span class="required">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">Selecione uma categoria</option>
+              <option>Elétrica</option>
+              <option>Climatização</option>
+              <option>Informática</option>
+              <option>Hidráulica</option>
+              <option>Mobiliário</option>
+              <option>Limpeza</option>
+              <option>Estrutura</option>
+              <option>Internet</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="location">Local <span class="required">*</span></label>
+            <input id="location" name="location" type="text" required placeholder="Ex.: Bloco B - Sala 203">
+          </div>
+          <div class="form-group">
+            <label for="priority">Prioridade <span class="required">*</span></label>
+            <select id="priority" name="priority" required>
+              <option value="">Selecione a prioridade</option>
+              <option value="Baixa">Baixa</option>
+              <option value="Média">Média</option>
+              <option value="Alta">Alta</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Descrição <span class="required">*</span></label>
+            <textarea id="description" name="description" required placeholder="Descreva o problema com o máximo de detalhes possível."></textarea>
+          </div>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-secondary" onclick="showSection('inicio')">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Enviar chamado</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CHAMADOS -->
+    <section id="chamados" class="section" aria-labelledby="tituloChamados">
+      <div class="hero">
+        <h2 id="tituloChamados">Meus chamados</h2>
+      </div>
+      <div class="filters">
+        <input id="searchInput" type="search" placeholder="Pesquisar chamados..." aria-label="Pesquisar chamados" oninput="renderTickets()">
+        <select id="statusFilter" aria-label="Filtrar por status" onchange="renderTickets()">
+          <option value="">Todos os status</option>
+          <option value="Aberto">Aberto</option>
+          <option value="Em análise">Em análise</option>
+          <option value="Em atendimento">Em atendimento</option>
+          <option value="Resolvido">Resolvido</option>
+        </select>
+        <select id="priorityFilter" aria-label="Filtrar por prioridade" onchange="renderTickets()">
+          <option value="">Todas as prioridades</option>
+          <option value="Alta">Alta</option>
+          <option value="Média">Média</option>
+          <option value="Baixa">Baixa</option>
+        </select>
+      </div>
+      <div id="ticketList" class="ticket-list"></div>
+    </section>
+
+    <!-- PAINEL TÉCNICO -->
+    <section id="painel" class="section" aria-labelledby="tituloPainel">
+      <div class="hero">
+        <h2 id="tituloPainel">Painel técnico</h2>
+        <p>Gerencie os chamados de manutenção.</p>
+      </div>
+      <div id="technicalList" class="ticket-list"></div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="ticketModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Detalhes do chamado</h2>
+        <button type="button" class="close-btn" aria-label="Fechar janela" onclick="closeModal()">×</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- REGIÃO PARA LEITOR DE TELA (Requisito Universal) -->
+  <div id="liveRegion" class="live-region" aria-live="polite" aria-atomic="true"></div>
+
+  <footer>
+    <p>UniFix — Projeto acadêmico de acessibilidade e aplicações web em tempo real.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
