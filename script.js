@@ -230,10 +230,11 @@ function createDemoData() {
   if (tickets.length > 0) return;
   const now = new Date().toISOString();
   tickets = [
-    { id: 1001, title: "Vazamento na pia", category: "Hidráulica", location: "Bloco C", priority: "Baixa", description: "Torneira vazando.", status: "Aberto", createdAt: now, history: [{ status: "Aberto", date: now, message: "Chamado registrado." }] }
+    { id: 1001, title: "Vazamento na pia", category: "Hidráulica", location: "Bloco C", priority: "Baixa", description: "Torneira vazando.", status: "Aberto", createdAt: now, history: [{ status: "Aberto", date: now, message: "Chamado registrado." }] },
+    { id: 1002, title: "Ar-condicionado sem gelar", category: "Climatização", location: "Bloco A", priority: "Média", description: "O aparelho liga, mas não esfria o ambiente.", status: "Em análise", createdAt: now, history: [{ status: "Em análise", date: now, message: "Aguardando técnico." }] }
   ];
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tickets));
 }
 
-createDemoData();
+createDemoData()
 renderAll();
