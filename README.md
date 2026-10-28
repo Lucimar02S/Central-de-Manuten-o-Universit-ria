@@ -1,9 +1,9 @@
-    # UniFix - Central de Manutenção Universitária
+    # UniFix - Central de Manutenção Predial
 
     ## 📌 Descrição do Problema de Negócio
-    A infraestrutura predial sofre frequentemente com a lentidão na resolução de problemas físicos (lâmpadas queimadas, vazamentos, equipamentos defeituosos) e a falta de comunicação entre a comunidade acadêmica e a equipe de manutenção. 
+    A infraestrutura predial sofre frequentemente com a lentidão na resolução de problemas físicos (lâmpadas queimadas, vazamentos, equipamentos defeituosos) e a falta de comunicação entre a usuários e a equipe de manutenção. 
 
-    O **UniFix** é um sistema projetado para resolver essa ineficiência. A plataforma atua como uma central de registros de problemas, permitindo que alunos e funcionários abram chamados e acompanhem o status de resolução em tempo real, enquanto a equipe técnica gerencia as demandas de forma ágil em um painel exclusivo.
+    O **UniFix** é um sistema projetado para resolver essa ineficiência. A plataforma atua como uma central de registros de problemas, permitindo que alunos ou funcionários abram chamados e acompanhem o status de resolução em tempo real, enquanto a equipe técnica gerencia as demandas de forma ágil em um painel exclusivo.
 
     ## 👥 Integrantes da Equipe
     1. [José Ribamar Rodrigues Júnior]
